@@ -17,11 +17,15 @@
 <label class="radio"><input type="radio" name="intent" value="Ready to book" checked> Ready to book</label>
 <label class="radio"><input type="radio" name="intent" value="Need more details"> Need more details</label>
 <label class="radio"><input type="radio" name="intent" value="Just exploring"> Just exploring</label></fieldset>
+<fieldset><legend>Payment option</legend>
+<label class="radio"><input type="radio" name="paymode" value="UPI advance" checked> Pay advance by UPI (<span id="advtxt">₹500</span>)</label>
+<label class="radio"><input type="radio" name="paymode" value="Cash to driver"> Cash to driver after the trip (no advance)</label></fieldset>
 <label>Note (optional)<textarea name="note" rows="3" placeholder="Pick-up area, drop location, special request"></textarea></label>
 <button class="btn btn-sun" type="submit">Continue</button></form>
 
 <div id="pay" hidden class="box">
 <h2 style="font-size:1.6rem">Booking received</h2><p id="sum" style="margin-bottom:1rem"></p>
+<p style="margin-bottom:1rem"><button class="btn btn-navy" id="ticket" type="button">Download ticket (PDF)</button></p>
 <div id="payBox"><div class="pay"><div id="qr"></div><div>
 <p>Advance to pay</p><div class="big" id="amt"></div><p>UPI ID: <b id="upiid"></b></p>
 <p style="font-size:.92rem;color:var(--mute);margin:.5rem 0">Scan with PhonePe, GPay or Paytm. On mobile, tap the button instead.</p>
@@ -35,8 +39,8 @@
 <!-- CAR PHOTO: replace with <img class="car-img" src="car.jpg" alt="Honda Amaze"> -->
 <div class="car-ph" style="margin:1rem 0"><b>Car photo yahan lagegi</b><span>Honda Amaze · AC sedan · 4 seats</span></div>
 <div class="steps"><div><b>Send your details</b><br>Name, route, passengers and travel date.</div>
-<div><b>Pay the advance</b><br>The amount is worked out for you. Pay by UPI QR; it goes straight to our bank account.</div>
+<div><b>Pay the advance</b><br>Pay the advance by UPI QR, or choose cash to the driver and pay after the trip.</div>
 <div><b>Get confirmation</b><br>We verify the payment and confirm your cab on WhatsApp.</div>
 <div><b>Pay the balance</b><br>Balance is paid in cash to the driver.</div></div></aside>
 </div></section></main>
-<div id="site-footer"></div><script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script><script src="config.js"></script><script src="app.js"></script></body></html>
+<div id="site-footer"></div><script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script><script src="config.js"></script><script src="app.js"></script></body></html>
