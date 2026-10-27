@@ -40,7 +40,7 @@ const DB=(function(){
     /* admin sign-in with the Firebase Auth user (email + password) */
     async login(pw){
       const r=await fetch("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key="+fb.apiKey,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:CFG.adminEmail,password:pw,returnSecureToken:true})});
-      if(!r.ok)throw new Error("bad login");keep(await r.json())
+      const j=await r.json().catch(()=>({}));if(!r.ok)throw new Error((j.error&&j.error.message)||"bad login");keep(j)
     },
     /* stay logged in on this device using the saved refresh token */
     async resume(){
@@ -68,3 +68,4 @@ const DB=(function(){
     }
   };
 })();
+    
