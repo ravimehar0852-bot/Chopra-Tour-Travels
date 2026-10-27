@@ -6,21 +6,26 @@ const KEY="chopra_admin_ok";
 let all=[];
 async function sha(p){const b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode("chopra:"+p));return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,"0")).join("")}
 function show(on){$("#login").hidden=on;$("#dash").hidden=!on;if(on)load()}
-try{if(localStorage.getItem(KEY)===CFG.adminHash)show(true)}catch(e){}
+if(DB.online){DB.resume().then(ok=>{if(ok)show(true)}).catch(()=>{})}
+else{try{if(localStorage.getItem(KEY)===CFG.adminHash)show(true)}catch(e){}}
 $("#lf").addEventListener("submit",async e=>{
   e.preventDefault();$("#lerr").textContent="";
+  if(DB.online){
+    try{await DB.login($("#pw").value)}catch(x){$("#lerr").textContent="Wrong password";return}
+    $("#pw").value="";show(true);return;
+  }
   if(!(window.crypto&&crypto.subtle)){$("#lerr").textContent="Open the site on https to log in.";return}
   const h=await sha($("#pw").value);
   if(h!==CFG.adminHash){$("#lerr").textContent="Wrong password";return}
-  try{localStorage.setItem(KEY,h)}catch(x){}  /* stays logged in on this device */
+  try{localStorage.setItem(KEY,h)}catch(x){}
   $("#pw").value="";show(true);
 });
-$("#lo").addEventListener("click",()=>{try{localStorage.removeItem(KEY)}catch(e){}show(false)});
+$("#lo").addEventListener("click",()=>{try{localStorage.removeItem(KEY)}catch(e){}DB.logout();show(false)});
 $("#rf").addEventListener("click",load);
 ["q","fs","fp"].forEach(i=>$("#"+i).addEventListener("input",render));
 
 async function load(){
-  try{all=await DB.list()}catch(e){all=[]}
+  try{all=await DB.list()}catch(e){all=[];alert("Could not load bookings. Check Firebase settings and log in again.")}
   all.sort((a,b)=>String(b.created).localeCompare(String(a.created)));
   render();
 }
