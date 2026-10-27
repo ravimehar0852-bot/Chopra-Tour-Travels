@@ -20,8 +20,8 @@ const CFG={
   /* Admin password is stored as a SHA-256 hash, not as plain text */
   adminHash:"0aed5213caf2533cb6bbcfdbf53919215ab51bba5e7d6431e803f210a284213c",
   /* Firebase: fill projectId and apiKey (Project settings > Your apps > Web app), and adminEmail (the admin user you create in Firebase Authentication). If empty, bookings are saved in this browser only. */
-  adminEmail:"",
-  firebase:{projectId:"",apiKey:""}
+  adminEmail:"Choparatravel@gmail.com",
+  firebase:{projectId:"chopara-travel-2641b",apiKey:"AIzaSyAMoC3v2Gp5tHWphiKtcKj2PACOQdqMa5o"}
 };
 
 /* Storage helper used by app.js and admin.js (Firestore REST + Firebase Auth for admin) */
