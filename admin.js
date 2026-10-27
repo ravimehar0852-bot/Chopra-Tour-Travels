@@ -11,7 +11,10 @@ else{try{if(localStorage.getItem(KEY)===CFG.adminHash)show(true)}catch(e){}}
 $("#lf").addEventListener("submit",async e=>{
   e.preventDefault();$("#lerr").textContent="";
   if(DB.online){
-    try{await DB.login($("#pw").value)}catch(x){$("#lerr").textContent="Wrong password";return}
+    try{await DB.login($("#pw").value)}catch(x){
+      const m=String(x.message||"");
+      $("#lerr").textContent=/INVALID_LOGIN|INVALID_PASSWORD|EMAIL_NOT_FOUND/.test(m)?"Wrong email or password, or the admin user is not created in Firebase Authentication":/OPERATION_NOT_ALLOWED/.test(m)?"Enable Email/Password in Firebase Authentication":/API_KEY|REFERER|BLOCKED/.test(m)?"Firebase API key problem: "+m:/TOO_MANY/.test(m)?"Too many attempts. Try again later":"Login failed: "+m;
+      return}
     $("#pw").value="";show(true);return;
   }
   if(!(window.crypto&&crypto.subtle)){$("#lerr").textContent="Open the site on https to log in.";return}
