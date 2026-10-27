@@ -151,3 +151,6 @@ td select{padding:.35rem;width:auto;font-size:.88rem}
 .car-ph{aspect-ratio:16/9;max-width:760px;margin-inline:auto;border:2px dashed var(--sun);border-radius:var(--r);background:var(--sky);display:grid;place-content:center;text-align:center;gap:.3rem;color:var(--navy);padding:1rem}
 .car-ph b{font-family:var(--serif);font-size:1.3rem}.car-ph span{color:var(--mute)}
 .car-img{width:100%;max-width:760px;margin-inline:auto;border-radius:var(--r);aspect-ratio:16/9;object-fit:cover}
+
+[hidden]{display:none!important}
+      
